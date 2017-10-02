@@ -287,7 +287,9 @@ class WrapperModuleChecker(BaseChecker):
                                            stdout=subprocess.PIPE,
                                            stderr=subprocess.PIPE)
                 output, err = process.communicate()
-                npm_bin_path = output.strip(b'\n ')
+                output = output.decode('UTF-8')
+                err = err.decode('UTF-8')
+                npm_bin_path = output.strip('\n ')
                 if os.path.isdir(npm_bin_path) and not err:
                     npm_bin_paths.append(npm_bin_path)
             if npm_bin_paths:
@@ -310,17 +312,19 @@ class WrapperModuleChecker(BaseChecker):
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
         output, err = process.communicate()
+        output = output.decode('UTF-8')
+        err = err.decode('UTF-8')
         if process.returncode != 0 and err:
             return []
         # Strip multi-line output https://github.com/eslint/eslint/issues/6810
-        for old in re.findall(br"`(.*)` instead.", output, re.DOTALL):
-            new = old.split(b'\n')[0][:20] + '...'
+        for old in re.findall(r"`(.*)` instead.", output, re.DOTALL):
+            new = old.split('\n')[0][:20] + '...'
             output = output.replace(old, new)
-        output = output.replace(fname, b'')
+        output = output.replace(fname, '')
         output_spplited = []
         if output:
             output_spplited.extend(
-                output.strip(b'\n').split(b'\n')[:-2])
+                output.strip('\n').split('\n')[:-2])
         return output_spplited
 
     def get_duplicated_items(self, items):
