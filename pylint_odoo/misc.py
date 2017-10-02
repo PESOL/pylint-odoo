@@ -314,7 +314,7 @@ class WrapperModuleChecker(BaseChecker):
             return []
         # Strip multi-line output https://github.com/eslint/eslint/issues/6810
         for old in re.findall(br"`(.*)` instead.", output, re.DOTALL):
-            new = old.split(b'\n')[0][:20] + b'...'
+            new = old.split(b'\n')[0][:20] + '...'
             output = output.replace(old, new)
         output = output.replace(fname, b'')
         output_spplited = []
