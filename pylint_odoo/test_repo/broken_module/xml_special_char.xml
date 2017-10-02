@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="1">
         <record id="res_country_mx" model="res.country">
-            <field name="name">MÃ©xico</field>
+            <field name="name">México</field>
         </record>
     </data>
 </openerp>
