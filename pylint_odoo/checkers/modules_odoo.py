@@ -752,12 +752,9 @@ class ModuleChecker(misc.WrapperModuleChecker):
                 with open(ext_file, 'rb') as fp:
                     if os.stat(ext_file).st_size > 1:
                         fp.seek(-2, os.SEEK_END)
-                        try:
-                            last_line = fp.readline().decode('UTF-8')
-                        except UnicodeDecodeError:
-                            continue
-                        if not (last_line.endswith('\n') or
-                                last_line.endswith('\r')):
+                        last_line = fp.readline()
+                        if not (last_line.endswith(b'\n') or
+                                last_line.endswith(b'\r')):
                             self.msg_args.append((ext_file_rel,))
         if self.msg_args:
             return False
