@@ -43,7 +43,7 @@ EXPECTED_ERRORS = {
     'method-search': 1,
     'missing-import-error': 3,
     'missing-manifest-dependency': 2,
-    'missing-newline-extrafiles': 3,
+    'missing-newline-extrafiles': 4,
     'missing-readme': 1,
     'missing-return': 1,
     'no-utf8-coding-comment': 3,
